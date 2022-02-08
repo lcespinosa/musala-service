@@ -1,0 +1,19 @@
+version: "3"
+services:
+  db:
+    image: mongo
+    container_name: musala_mongodb_server
+    restart: always
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - "${MONGO_DATABASE_PORT}:27017"
+    # Where our data will be persisted
+    volumes:
+      - ${MONGO_DB_PATH}:/data
+    networks:
+      - musala-network
+
+#Docker Networks
+networks:
+  musala-network:
+    driver: bridge
