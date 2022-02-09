@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Gateway = require("../models/gateway.schema");
 
 const mongoDbUrl = process.env.MONGO_DB;
 
@@ -6,8 +7,7 @@ const dbConnection = async () => {
   try {
     await mongoose.connect(mongoDbUrl, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true
+      useUnifiedTopology: true
     });
 
     console.log('MONGO-DB LOCAL');
