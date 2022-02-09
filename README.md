@@ -46,13 +46,13 @@ npm run start
 
 **API Endpoints**
 
-| Method | URI                                            | Action                                 |
-|--------|------------------------------------------------|----------------------------------------|
-| GET    | /api/gateways                                  | Get all gateways                       |
-| GET    | /api/gateways/{id}                             | View a single gateway                  |
-| POST   | /api/gateways                                  | Store a gateways with multiple devices |
-| POST   | /api/gateways/{id}/devices                     | Add devices to a gateway               |
-| DELETE | /api/gateways/{gateway_id}/devices/{device_id} | Remove a device from a gateway         |
+| Method | URI                                   | Action                                 |
+|--------|---------------------------------------|----------------------------------------|
+| GET    | /api/gateways                         | Get all gateways                       |
+| GET    | /api/gateways/:id                     | View a single gateway                  |
+| POST   | /api/gateways                         | Store a gateways with multiple devices |
+| PATCH  | /api/gateways/:id/devices             | Add devices to a gateway               |
+| DELETE | /api/gateways/:gatewayId/devices/{id} | Remove a device from a gateway         |
 
 **Entity Relationship Model**
 

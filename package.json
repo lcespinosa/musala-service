@@ -8,8 +8,8 @@
     "supertest": "^6.2.2"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "start:dev": "nodemon server/index.js",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
     "test": "jest --config ./tests/jest-e2e.json"
   },
   "repository": {
