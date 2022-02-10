@@ -24,7 +24,7 @@ const getOneGateway = async (req, res) => {
   try {
     const gateway = await Gateway.findOne({
       _id: id
-    });
+    }).populate({path: 'devices'});
 
     if (!gateway) {
       res.status(404).json({
@@ -47,7 +47,7 @@ const getOneGateway = async (req, res) => {
 }
 
 const storeGateway = async (req, res) => {
-  const {serial_number, name, ipv4} = req.body;
+  const {serial_number, name, ipv4, devices} = req.body;
 
   try {
     const existGateway = await Gateway.findOne({serial_number});
@@ -58,20 +58,42 @@ const storeGateway = async (req, res) => {
       });
     }
 
-    const gateway = new Gateway(req.body);
-    await gateway.save();
+    if (devices.length <= 10) {
+      const gateway = new Gateway({serial_number, name, ipv4});
+      await gateway.save();
 
-    res.json({
-      ok: true,
-      gateway
-    });
+      for (let device of devices) {
+        await storeDevice(gateway._id, device);
+      }
+      const updatedGateway = await Gateway.findById(gateway.id).populate({path: 'devices'});
+      const data = updatedGateway.toObject();
+
+      res.json({
+        ok: true,
+        gateway
+      });
+    }
+    else {
+      return res.status(400).json({
+        ok: false,
+        message: 'The gateway should not have more than 10 devices.'
+      });
+    }
   }
   catch (e) {
-    res.status(500).json({
+    res.status(400).json({
       ok: false,
       message: 'Error!'
     });
   }
+}
+
+const storeDevice = async (gatewayId, data) => {
+  return Gateway.findByIdAndUpdate(gatewayId, {
+    $push: {
+      devices: [await Device.create(data)]
+    }
+  }, { upsert: true });
 }
 
 const addDevice = async (req, res) => {
@@ -89,11 +111,7 @@ const addDevice = async (req, res) => {
         });
       }
 
-      const updatedGateway = await Gateway.findByIdAndUpdate(id, {
-        $push: {
-          devices: [new Device({uid, created_at, vendor, status})]
-        }
-      }, { upsert: true });
+      const updatedGateway = await storeDevice(id, {uid, created_at, vendor, status});
 
       res.json({
         ok: true,

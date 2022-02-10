@@ -86,10 +86,20 @@ describe("/api/gateways TEST", () => {
         serial_number: '123123123',
         name: 'some_name',
         ipv4: '123.123.123.123',
+        devices: [
+          {
+            uid: 551236,
+            vendor: 'vmWare8',
+            created_at: new Date(),
+            status: 'online',
+          }
+        ]
       });
 
     const gateway = await Gateway.findOne({serial_number: '123123123'});
+    const device = await Device.findOne({uid: 551236});
     expect(gateway).toBeTruthy();
+    expect(device).toBeTruthy();
   });
 
   it('should not create gateway without valid data', async () => {
