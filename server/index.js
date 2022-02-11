@@ -1,35 +1,38 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 const cors = require('cors');
-const app = express();
 
-app.use(cors());
+/**
+ * This file contains all steps for server initialization
+ *
+ * */
+
+const app = express();
+const port = process.env.PORT || 5000;
 
 //Body parser
-app.use(express.json());
-app.use(function(req, res, next) {
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-// Node server
-const server = require('http').createServer(app);
-
-// Routes
+// API calls
 app.use('/test', (req, res) => {
   const array = [];
   res.json({array});
 });
 app.use('/api/gateways', require('../routes/gateway.router'));
 
-const port = process.env.PORT || 3300;
-server.listen(port, (err) => {
-  if (err) {
-    throw new Error(err);
-  }
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, '../client/build')));
 
-  console.log('Server running on port', port);
-});
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
+}
 
-module.exports = server;
+app.listen(port, () => console.log(`Listening on port ${port}`));
+
+module.exports = app;

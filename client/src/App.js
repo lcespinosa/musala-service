@@ -36,7 +36,7 @@ function App() {
   const handleGatewaySubmit = useCallback(async (values) => {
     try {
       const response = await http.post('/api/gateways', values);
-      const {data: {ok, gateway}} = response;
+      const {data: {ok}} = response;
       if (ok) {
         fetchGateways();
       }

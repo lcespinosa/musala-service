@@ -2,7 +2,6 @@ import React, {Fragment, useEffect, useState} from "react";
 import {Dialog, Transition} from "@headlessui/react";
 import {DeviceForm, DeviceItem} from "../../device";
 import http from "../../../helpers/http";
-import {DocumentAddIcon, TrashIcon} from "@heroicons/react/solid";
 
 const GatewayView = ({isOpen, closeModal, model, handleSubmitDevices}) => {
   const [gateway, setGateway] = useState(null);
@@ -110,7 +109,7 @@ const GatewayView = ({isOpen, closeModal, model, handleSubmitDevices}) => {
                       </dt>
                       { gateway?.devices?.length > 0 && (
                         <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                          <ul role="list" className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                          <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
                             { gateway?.devices?.map((device) => <DeviceItem key={device._id} model={device} removeDevice={handleRemoveDevice} />)}
                           </ul>
                         </dd>

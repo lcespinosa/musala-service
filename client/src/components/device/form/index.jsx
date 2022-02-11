@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {Dialog, Transition} from "@headlessui/react";
-import {ErrorMessage, FieldArray, Form, Field, Formik} from "formik";
+import {Form, Formik} from "formik";
 
 const DeviceForm = ({isOpen, closeModal, gateway, onSubmitDevice, ...props}) => {
   return (
