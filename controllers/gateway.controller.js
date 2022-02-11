@@ -2,6 +2,12 @@ const Gateway = require('../models/gateway.schema');
 const Device = require('../models/device.schema');
 const mongoose = require('mongoose');
 
+/**
+ * Action for get all the gateways and it's devices, stored in the DB
+ *
+ * @param req Request object from client
+ * @param res Response object to client
+ * */
 const getGateways = async (req, res) => {
   try {
     const gateways = await Gateway.find().populate({path: 'devices'}).sort('-online');
@@ -18,6 +24,12 @@ const getGateways = async (req, res) => {
   }
 }
 
+/**
+ * Action for get one gateway and it's devices, stored in the DB
+ *
+ * @param req Request object from client
+ * @param res Response object to client
+ * */
 const getOneGateway = async (req, res) => {
   const id = req.params.id;
 
@@ -46,6 +58,13 @@ const getOneGateway = async (req, res) => {
   }
 }
 
+/**
+ * Action for store a gateway and it's devices information in the DB
+ * Only 10 devices are allowed
+ *
+ * @param req Request object from client
+ * @param res Response object to client
+ * */
 const storeGateway = async (req, res) => {
   const {serial_number, name, ipv4, devices} = req.body;
 
@@ -88,6 +107,12 @@ const storeGateway = async (req, res) => {
   }
 }
 
+/**
+ * Auxiliary method for handle gateway store operation using mongose
+ *
+ * @param gatewayId Gateway identifier
+ * @param data Gateway data for store
+ * */
 const storeDevice = async (gatewayId, data) => {
   return Gateway.findByIdAndUpdate(gatewayId, {
     $push: {
@@ -96,6 +121,13 @@ const storeDevice = async (gatewayId, data) => {
   }, { upsert: true });
 }
 
+/**
+ * Action for store a gateway's device information in the DB
+ * Only 10 devices are allowed
+ *
+ * @param req Request object from client
+ * @param res Response object to client
+ * */
 const addDevice = async (req, res) => {
   const id = req.params.id;
   const {uid, created_at, vendor, status} = req.body;
@@ -127,6 +159,12 @@ const addDevice = async (req, res) => {
   }
 }
 
+/**
+ * Action for remove a gateway from the DB
+ *
+ * @param req Request object from client
+ * @param res Response object to client
+ * */
 const removeDevice = async (req, res) => {
   const gatewayId = req.params.gatewayId;
   const id = req.params.id;

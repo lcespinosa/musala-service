@@ -1,6 +1,10 @@
 const {Schema, model} = require("mongoose");
 const Device = require('./device.schema');
 
+/**
+ * Gateway mongo schema
+ *
+ * */
 const schema = Schema({
   serial_number: { type: String, required: true, unique: true },
   name: { type: String, required: true },

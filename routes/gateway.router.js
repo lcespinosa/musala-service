@@ -6,6 +6,11 @@ const {validateGatewayFields} = require("../middlewares/gateway_store.request");
 
 const router = Router();
 
+
+/**
+ * This file contains all api endpoints to Gateway's controller actions
+ *
+ * */
 router.get('/', getGateways);
 router.get('/:id', getOneGateway);
 

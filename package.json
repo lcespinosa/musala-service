@@ -5,12 +5,16 @@
   "main": "index.js",
   "devDependencies": {
     "jest": "^27.5.0",
+    "lerna": "^4.0.0",
     "supertest": "^6.2.2"
   },
   "scripts": {
+    "dev": "concurrently -n \"server,client\" -c \"green,blue\" \"npm run start:dev\" \"cd client && npm run start\"",
+    "build": "echo 'Building Client to public/client…' && cd client && npm run build -y && cd .. && npm run start",
     "start": "node index.js",
     "start:dev": "nodemon index.js",
-    "test": "jest --config ./tests/jest-e2e.json"
+    "test": "jest --config ./tests/jest-e2e.json",
+    "postinstall": "lerna bootstrap"
   },
   "repository": {
     "type": "git",
@@ -24,10 +28,13 @@
   },
   "homepage": "https://github.com/lcespinosa/musala-service#readme",
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
-    "mongoose": "^6.2.1"
+    "mongoose": "^6.2.1",
+    "nodemon": "^2.0.15"
   }
 }

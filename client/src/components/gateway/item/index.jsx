@@ -12,12 +12,12 @@ const GatewayItem = ({model, onClick}) => {
         <ServerIcon className="h-14 w-14 rounded-full text-gray-300 bg-gray-100 p-2" />
       </div>
       <div className="flex-1 min-w-0">
-        <a href="#" className="focus:outline-none">
+        <button className="focus:outline-none">
           <span className="absolute inset-0" aria-hidden="true" />
           <p className="text-sm font-medium text-gray-900">{model.name}</p>
           <p className="text-sm text-gray-500 truncate">SN: {model.serial_number}</p>
           <p className="text-sm text-gray-500 truncate">IPv4: {model.ipv4}</p>
-        </a>
+        </button>
       </div>
       <div className="flex-initial min-w-0">
         <span className="h-14 w-14 rounded-full text-gray-800 bg-gray-100 py-2 px-3">{model?.devices?.length}</span>

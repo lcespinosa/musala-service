@@ -1,9 +1,13 @@
 const express = require('express');
-const path = require('path');
 require('dotenv').config();
+
+/**
+ * This file is the entry point for server start
+ *
+ * */
 
 // DB Configuration
 require('./database/mongodb.config').dbConnection();
 
 // Express Application
-require('./server');
+const app = require('./server');

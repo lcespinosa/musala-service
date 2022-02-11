@@ -3,6 +3,10 @@ const Gateway = require("../models/gateway.schema");
 
 const mongoDbUrl = process.env.MONGO_DB;
 
+/**
+ * Mongose connection provider
+ *
+ * */
 const dbConnection = async () => {
   try {
     await mongoose.connect(mongoDbUrl, {

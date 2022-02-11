@@ -7,24 +7,28 @@ This sample project is managing gateways - master devices that control multiple 
 git clone https://github.com/lcespinosa/musala-service.git
 ```
 ## Setup the environment.
-You need configure the environment vars for the project, please copy the .env.example file to .env and configure those variables values.
+You need configure the environment vars for the project, please copy the .env.example file to (.env | .env.development | .env.production) and configure those variables values.
 
 ```bash
 PORT=3300
+NODE_ENV=local
 MONGO_DATABASE_PORT=27017
 MONGO_DB_PATH=<path to db data>
 MONGO_DB=<mongo connection url>
 ```
 
 ## Install NodeJs dependencies
-You need move to the project directory and install all project dependencies using `npm` or `yarn` like this:
+You need move to the project directory and install all project dependencies using `npm` like this:
 
 ```bash
 npm install
+```
 
-or
+## Running Docker
+You need docker for running MongoDB:
 
-yarn install
+```bash
+docker-compose up -d
 ```
 
 ## Running locally
@@ -39,7 +43,6 @@ For build and run the project for production you need execute those npm scripts:
 
 ```bash
 npm run build
-npm run start
 ```
 
 ## Documentation

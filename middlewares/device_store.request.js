@@ -1,5 +1,9 @@
 const {validationResult} = require("express-validator");
 
+/**
+ * Validation rules for device store request
+ *
+ * */
 const validateDeviceFields = (req, res, next) =>{
   const errors = validationResult(req);
 

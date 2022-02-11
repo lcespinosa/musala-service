@@ -1,5 +1,9 @@
 const {validationResult} = require("express-validator");
 
+/**
+ * Validation rules for gateway store request
+ *
+ * */
 const validateGatewayFields = (req, res, next) =>{
   const errors = validationResult(req);
 
