@@ -7,7 +7,7 @@ This sample project is managing gateways - master devices that control multiple 
 git clone https://github.com/lcespinosa/musala-service.git
 ```
 ## Setup the environment.
-You need configure the environment vars for the project, please copy the .env.example file to (.env | .env.development | .env.production) and configure those variables values.
+You need configure the environment vars for the project, please copy the `.env.example` file to `.env` and configure those variables values.
 
 ```bash
 PORT=3300
@@ -44,6 +44,7 @@ For build and run the project for production you need execute those npm scripts:
 ```bash
 npm run build
 ```
+*don't forget set NODE_ENV=production on .env file*
 
 ## Documentation
 
